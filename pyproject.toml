@@ -1,9 +1,9 @@
 [project]
 name = "django-hstore-field"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.0.1"
+description = "An easy to use postgres hstore field that is based on django-hstore-widget"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.19"
 dependencies = ["django-hstore-widget>=0.0.19"]
 
 [dependency-groups]
