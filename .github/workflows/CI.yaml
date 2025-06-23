@@ -9,7 +9,6 @@ permissions:
 jobs:
     test-backend:
         name: Test Backend
-        needs: build-frontend
         runs-on: ubuntu-latest
         strategy:
             matrix:
