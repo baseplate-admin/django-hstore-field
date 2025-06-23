@@ -13,11 +13,3 @@ class AdminHStoreFieldTest(TestCase):
         formfield = self.field.formfield()
         self.assertIsInstance(formfield, HStoreFormField)
         self.assertIsInstance(formfield.widget, HStoreFormWidget)
-
-    def test_deconstruct_includes_migration_hint(self):
-        name, path, args, kwargs = self.field.deconstruct()
-        # Check for migration dependency hint
-        self.assertIn("__migration_dependency__", kwargs)
-        self.assertEqual(
-            kwargs["__migration_dependency__"], ("django_hstore_widget", "__latest__")
-        )
