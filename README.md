@@ -59,8 +59,7 @@ class Migration(migrations.Migration):
 
 ```
 
-
-## Example
+and then use it:
 
 ```python
 # yourapp/models.py
@@ -71,3 +70,8 @@ from django_hstore_field import HStoreField
 class ExampleModel(models.Model):
     data = HStoreField()
 ```
+
+
+Example: 
+
+Check the [cats directory](https://github.com/baseplate-admin/django-hstore-field/tree/master/tests/cat)
