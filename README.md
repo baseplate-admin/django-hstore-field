@@ -9,13 +9,20 @@ An easy to use postgres [hstore](www.postgresql.org/docs/current/hstore.html) fi
 
 -   Python 3.9 and Up ( well technically any python version from 3.6 should work )
 -   Django 3.2 and Up
--   Modern browsers ( Chrome 112+, Firefox 117+, Safari 16.5+ )
+-   Modern browsers ( Chrome 112+, Firefox 117+, Safari 16.5+ or [any browsers supporting css nesting](https://caniuse.com/css-nesting) ) 
+
+## Installation
 
 ```bash
 pip install django-hstore-field
 ```
 
-## Installation
+## Usage
+
+
+### Option 1:
+
+Include [`django-hstore-widget`](https://github.com/baseplate-admin/django-hstore-widget) in your `settings.py`'s `INSTALLED_APPS`:
 
 ```python
 
@@ -29,7 +36,10 @@ INSTALLED_APPS = [
 
 ```
 
-Then include  `django_hstore_widget`'s migration to any of your model
+
+### Option 2:
+
+Include  [`django-hstore-widget`](https://github.com/baseplate-admin/django-hstore-widget)'s migration to any of your model's migration:
 
 
 ```python
@@ -50,7 +60,7 @@ class Migration(migrations.Migration):
 ```
 
 
-## Usage
+## Example
 
 ```python
 # yourapp/models.py
