@@ -6,7 +6,9 @@ import django.contrib.postgres.fields
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = []
+    dependencies = [
+        ("django_hstore_widget", "__latest__"),
+    ]
 
     operations = [
         migrations.CreateModel(
