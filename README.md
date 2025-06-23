@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # any operations
+        ...
     ]
 
 ```
