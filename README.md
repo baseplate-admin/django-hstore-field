@@ -75,6 +75,6 @@ class ExampleModel(models.Model):
 ```
 
 
-Example: 
+### Example: 
 
 Check the [cats directory](https://github.com/baseplate-admin/django-hstore-field/tree/master/tests/cat)
