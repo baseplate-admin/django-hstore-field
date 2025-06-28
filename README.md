@@ -1,7 +1,5 @@
 # django-hstore-field
 
-> [!NOTE]  
-If you want a lower level implementation, please check [django-hstore-widget](https://github.com/baseplate-admin/django-hstore-widget).
 
 
 [![PyPI Downloads](https://static.pepy.tech/badge/django-hstore-field)](https://pepy.tech/projects/django-hstore-field) [![CI](https://github.com/baseplate-admin/django-hstore-field/actions/workflows/CI.yaml/badge.svg)](https://github.com/baseplate-admin/django-hstore-field/actions/workflows/CI.yaml) [![Pypi Badge](https://img.shields.io/pypi/v/django-hstore-field.svg)](https://pypi.org/project/django-hstore-field/) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/baseplate-admin/django-hstore-field/master.svg)](https://results.pre-commit.ci/latest/github/baseplate-admin/django-hstore-field/master)
@@ -78,3 +76,7 @@ class ExampleModel(models.Model):
 ### Example: 
 
 Check the [cats directory](https://github.com/baseplate-admin/django-hstore-field/tree/master/tests/cat)
+
+> [!NOTE]  
+If you want a lower level implementation, please check [django-hstore-widget](https://github.com/baseplate-admin/django-hstore-widget).
+
