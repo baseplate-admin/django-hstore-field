@@ -8,7 +8,7 @@ An easy to use [postgres hstore](https://www.postgresql.org/docs/current/hstore.
 
 ## Requirements
 
--   Python 3.9 and Up ( well technically any python version from 3.6 should work )
+-   Python 3.10 and Up ( well technically any python version from 3.6 should work )
 -   Django 3.2 and Up
 -   Modern browsers ( Chrome 112+, Firefox 117+, Safari 16.5+ or [any browsers supporting css nesting](https://caniuse.com/css-nesting) ) 
 
