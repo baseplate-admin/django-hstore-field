@@ -42,7 +42,6 @@ dependencies = ["django-hstore-widget>=0.0.25"]
 
 
 [dependency-groups]
-build = ["hatch>=1.14.1"]
 test = [
     "pytest>=8.0.1",
     "pytest-django>=4.8.0",
