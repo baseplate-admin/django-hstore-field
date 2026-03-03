@@ -75,7 +75,7 @@ class ExampleModel(models.Model):
 
 ### Example: 
 
-Check the [cats directory](https://github.com/baseplate-admin/django-hstore-field/tree/master/tests/cat)
+Check the [`cat` directory](https://github.com/baseplate-admin/django-hstore-field/tree/master/tests/cat)
 
 > [!NOTE]  
 If you want a lower level implementation, please check [django-hstore-widget](https://github.com/baseplate-admin/django-hstore-widget).
