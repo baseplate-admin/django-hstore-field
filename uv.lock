@@ -250,7 +250,7 @@ wheels = [
 
 [[package]]
 name = "django-hstore-field"
-version = "0.0.3"
+version = "0.0.5"
 source = { editable = "." }
 dependencies = [
     { name = "django-hstore-widget" },
@@ -281,15 +281,15 @@ test = [
 
 [[package]]
 name = "django-hstore-widget"
-version = "0.0.23"
+version = "0.0.25"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django", version = "4.2.23", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "django", version = "5.2.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/88/b4/dc899dc49334bbdf6ce83aaa14162e1139843a6fe83d0bc74af276218d40/django_hstore_widget-0.0.23.tar.gz", hash = "sha256:15a583cacb8faf6a31fe71c0d6125739aa649d2aef624082a046864ba4da6d56", size = 15717, upload-time = "2025-08-15T16:21:56.096Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5b/91/3aa59e174f89138caa14353f04cd6a1c28af96396cfa6682194bda8a661c/django_hstore_widget-0.0.25.tar.gz", hash = "sha256:25c8ca3eda89d64abdd608c327f68a6a70f0c5e4d98454dca88acd0bf9068018", size = 31988, upload-time = "2026-03-03T13:19:07.561Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8c/af/840420a798e04b5e77d355923124c015e42d4c0eaaa0b814552bb6275ac8/django_hstore_widget-0.0.23-py3-none-any.whl", hash = "sha256:93cf0fc1fd9f40dc2844d1e3450a6aec2264e7b9db259d40600a0792941200b4", size = 19099, upload-time = "2025-08-15T16:21:54.626Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/60/11a64a4733cb9f0960d1d6bcacf3cf0ce742a382fb7782fc769af83b301a/django_hstore_widget-0.0.25-py3-none-any.whl", hash = "sha256:ce30d6dfe4f517e66de07acef19d73af79eabae21166c5364d3659d1eb443be2", size = 35318, upload-time = "2026-03-03T13:19:06.478Z" },
 ]
 
 [[package]]
