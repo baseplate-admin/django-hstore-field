@@ -72,6 +72,25 @@ class ExampleModel(models.Model):
     data = HStoreField()
 ```
 
+### Indexing
+
+You should use GIN indexing for 99% of the use case, create an index like this:
+
+```python
+# models.py
+from django.db import models
+from django.contrib.postgres.indexes import GinIndex
+from django_hstore_field import HStoreField
+
+
+class ExampleModel(models.Model):
+    data = HStoreField()
+
+    class Meta:
+        indexes = [
+            GinIndex(fields=["data"], name="example_data_gin"),
+        ]
+```
 
 ### Example: 
 
