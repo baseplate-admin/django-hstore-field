@@ -3,13 +3,7 @@ from django.test import Client
 from django.contrib.auth.models import User
 from cat.models import Cat
 import pytest
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-
-
-WAIT_TIME = 100
+from playwright.sync_api import sync_playwright, Error as PlaywrightError
 
 
 @pytest.fixture
@@ -61,57 +55,60 @@ def test_hstore_field_edit_view_render_no_js(client_with_login):
 
 
 @pytest.mark.django_db
-def test_hstore_field_edit_view_render_js(driver, live_server, admin_user):
-    """Selenium test to verify HStore widget renders correctly in the Django admin."""
-
-    # Open the admin login page
-    driver.get(f"{live_server.url}/admin/login/")
-    WebDriverWait(driver, WAIT_TIME).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="username"]'))
-    )
-
-    # Log in to admin
-    driver.find_element(By.CSS_SELECTOR, 'form input[name="username"]').send_keys(
-        admin_user.username
-    )
-    driver.find_element(By.CSS_SELECTOR, 'form input[name="password"]').send_keys("cat")
-    driver.find_element(By.CSS_SELECTOR, 'form input[type="submit"]').click()
-
-    # Wait for login
-    WebDriverWait(driver, WAIT_TIME).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "body.dashboard"))
-    )
-
-    # Go to the Cat change page
+def test_hstore_field_edit_view_render_js(live_server, admin_user):
+    """Playwright test to verify HStore widget renders correctly in the Django admin."""
+    # Perform all Django ORM operations before starting Playwright,
+    # since Playwright's sync API runs an internal asyncio loop that
+    # triggers Django's SynchronousOnlyOperation check.
     cat = Cat.objects.create(name="Murphy", data={"race": "", "gender": "male"})
     change_url = f"{live_server.url}{reverse('admin:cat_cat_change', args=(cat.pk,))}"
-    driver.get(change_url)
+    login_url = f"{live_server.url}/admin/login/"
 
-    actions = ActionChains(driver)
-    actions.move_to_element(
-        driver.find_element(By.CSS_SELECTOR, "django-hstore-widget")
-    ).perform()
+    try:
+        pw = sync_playwright().start()
+        browser = pw.chromium.launch(headless=True)
+    except PlaywrightError as e:
+        pytest.skip(str(e))
 
-    # Assert the widget is present
-    hstore_widget = driver.find_element(By.CSS_SELECTOR, "django-hstore-widget")
-    assert hstore_widget is not None
+    context = browser.new_context()
+    page = context.new_page()
 
-    # Assert that console is empty
-    # If console is empty, there is no mounting issue
-    console_logs = driver.get_log("browser")
-    assert not any(
-        entry for entry in console_logs if entry["level"] in ("WARNING", "ERROR")
-    )
+    try:
+        console_messages = []
+        page.on("console", lambda msg: console_messages.append(msg))
 
-    # Assert that there is the hidden textarea
-    WebDriverWait(driver, WAIT_TIME).until(
-        EC.presence_of_element_located(
-            (By.CSS_SELECTOR, "django-hstore-widget textarea")
+        # Open the admin login page
+        page.goto(login_url)
+        page.wait_for_selector('input[name="username"]')
+
+        # Log in to admin
+        page.fill('form input[name="username"]', admin_user.username)
+        page.fill('form input[name="password"]', "cat")
+        page.click('form input[type="submit"]')
+
+        # Wait for login
+        page.wait_for_selector("body.dashboard")
+
+        # Go to the Cat change page
+        page.goto(change_url)
+
+        # Assert the widget is present
+        hstore_widget = page.query_selector("django-hstore-widget")
+        assert hstore_widget is not None
+
+        # Assert that console is empty
+        # If console is empty, there is no mounting issue
+        assert not any(
+            message
+            for message in console_messages
+            if message.type in ("warning", "error")
         )
-    )
-    hstore_widget_textarea = driver.find_element(
-        By.CSS_SELECTOR, "django-hstore-widget textarea"
-    )
-    assert hstore_widget_textarea is not None
 
-    # __import__("time").sleep(100)
+        # Assert that there is the hidden textarea
+        page.wait_for_selector("django-hstore-widget textarea", state="attached")
+        hstore_widget_textarea = page.query_selector("django-hstore-widget textarea")
+        assert hstore_widget_textarea is not None
+    finally:
+        context.close()
+        browser.close()
+        pw.stop()

@@ -1,28 +1,6 @@
 import os
 import django
 from django.conf import settings
-import pytest
-from selenium import webdriver
-from selenium.common.exceptions import WebDriverException
-from django.utils.encoding import force_str
-
-
-@pytest.fixture(scope="session")
-def driver():
-    chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument("--headless")
-    # chrome_options.add_argument("--window-size=1920,1200")
-
-    # Set up console logging preferences
-    chrome_options.set_capability("goog:loggingPrefs", {"browser": "ALL"})
-
-    try:
-        b = webdriver.Chrome(options=chrome_options)
-    except WebDriverException as e:
-        pytest.skip(force_str(e))
-    else:
-        yield b
-        b.quit()
 
 
 def pytest_sessionstart(session):
