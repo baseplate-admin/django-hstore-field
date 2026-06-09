@@ -3,7 +3,7 @@ name = "django-hstore-field"
 version = "0.0.6"
 description = "An easy to use postgres hstore field that is based on django-hstore-widget"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
     { name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com" },
