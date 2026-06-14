@@ -1,3 +1,8 @@
+> [!NOTE]  
+Moved to [django-hstore-project](https://github.com/baseplate-admin/django-hstore-project)
+
+
+
 # django-hstore-field
 
 
